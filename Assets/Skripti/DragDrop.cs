@@ -8,7 +8,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler,IBeginDragHandler,IDr
     //uzglaba noradi uz objektu skriptiem
     public Objekti objektuSkripts;
     //Velkamam objektam piestiprinata CanvasGroup komponente
-    public CanvasGroup kanvasGrupa;
+    private CanvasGroup kanvasGrupa;
     //Objekta atrašanas vieta kurš tiek parvietots
     private RectTransform velkObjRectTransf;
 
@@ -22,17 +22,32 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler,IBeginDragHandler,IDr
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Uzklikšķināts uz velkama objekta!");   
+        Debug.Log("Uzklikšķināts uz velkama objekta!");
+        objektuSkripts.PedejaisVilktais = null;
+        kanvasGrupa.alpha= 0.6f;
+        kanvasGrupa.blocksRaycasts= false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-     
+        velkObjRectTransf.anchoredPosition += eventData.delta / objektuSkripts.kanva.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+        objektuSkripts.PedejaisVilktais = eventData.pointerDrag;
+        kanvasGrupa.alpha = 1f;
+
+        if (objektuSkripts.vaiIstajaVieta == false)
+        {
+            kanvasGrupa.blocksRaycasts = true;
+        }
+        else
+        {
+            objektuSkripts.PedejaisVilktais = null;
+        }
+
+        objektuSkripts.vaiIstajaVieta= false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
