@@ -2,11 +2,11 @@
 Projekts "Drag and drop", realize automašīnu novietošanas spēli. Spēle paredzēta mazāko klašu skolēniem.
 
 ##Darāmo darbu saraksts
-- [ ] Iespēja parvietot automašīnu objektus
-- [ ] Iespēja objektu novietot brīvā vietā uz kartes
-- [ ] Iespeja objektu novietot uz nepareiza laukuma
-- [ ] Iespeja objektu novietot uz pareiza laukuma
-- [ ] Iespeja rotet objektu pulksteņ un pretēj pulksteņrādīdāj virzienā
+- [x] Iespēja parvietot automašīnu objektus
+- [x] Iespēja objektu novietot brīvā vietā uz kartes
+- [x] Iespeja objektu novietot uz nepareiza laukuma
+- [x] Iespeja objektu novietot uz pareiza laukuma
+- [x] Iespeja rotet objektu pulksteņ un pretēj pulksteņrādīdāj virzienā
 - [ ] Skaņas effekti
-- [ ] Iespeja mainit objekta izmeru X asi
-- [ ] Iespeja mainit objekta izmeru Y asi
+- [x] Iespeja mainit objekta izmeru X asi
+- [x] Iespeja mainit objekta izmeru Y asi
