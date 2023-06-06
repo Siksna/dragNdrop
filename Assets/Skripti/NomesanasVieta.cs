@@ -9,6 +9,7 @@ public class NomesanasVieta : MonoBehaviour,IDropHandler {
 	private Vector2 vietasIzm, velkObjIzm;
 	private float xIzmStarpiba, yIzmStarpiba;
 	public Objekti objektuSkripts;
+	public int MasinuSk=0;
     public void OnDrop(PointerEventData eventData)
     {
        if(eventData.pointerDrag!=null)
@@ -31,12 +32,13 @@ public class NomesanasVieta : MonoBehaviour,IDropHandler {
                 Debug.Log("Objektu rotācijas starpība: "+rotacijasStarpiba+"\nPlatuma starpība: "+xIzmStarpiba + "\nAugstuma starpība: " + yIzmStarpiba);
 
 
-				if ((rotacijasStarpiba <= 6 || (rotacijasStarpiba >= 354 && rotacijasStarpiba <= 360)) && (xIzmStarpiba <= 0.1 && yIzmStarpiba <= 0.1))
+				if ((rotacijasStarpiba <= 6 && (xIzmStarpiba <= 0.15 && yIzmStarpiba <= 0.15) || (rotacijasStarpiba >= 354 && rotacijasStarpiba <= 360) && (xIzmStarpiba <= 0.15 && yIzmStarpiba <= 0.15)))
 				{
 
 					Debug.Log("Nomests pareizajā vietā!");
+					MasinuSk++;
 					objektuSkripts.vaiIstajaVieta = true;
-					eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition=GetComponent<RectTransform>().position;
+					eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition=GetComponent<RectTransform>().anchoredPosition;
 					eventData.pointerDrag.GetComponent<RectTransform>().localRotation = GetComponent<RectTransform>().localRotation;
 					eventData.pointerDrag.GetComponent<RectTransform>().localScale = GetComponent<RectTransform>().localScale;
 
