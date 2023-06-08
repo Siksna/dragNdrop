@@ -49,6 +49,7 @@ public class Objekti : MonoBehaviour {
 	[HideInInspector]
 	public bool vaiIstajaVieta = false;
 
+	[HideInInspector]
 	public GameObject PedejaisVilktais = null;
 
     void Start () {
