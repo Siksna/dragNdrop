@@ -15,6 +15,9 @@ public class Objekti : MonoBehaviour {
 	public GameObject Traktors1;
 	public GameObject Traktors5;
 	public GameObject Ugunsdzeseji;
+	public GameObject UzvarasLogs;
+	public GameObject[] Zvaigznes;
+	public GameObject LaikaTeksts;
 
 
 	[HideInInspector]
@@ -48,6 +51,7 @@ public class Objekti : MonoBehaviour {
 
 	[HideInInspector]
 	public bool vaiIstajaVieta = false;
+
 
 	[HideInInspector]
 	public GameObject PedejaisVilktais = null;

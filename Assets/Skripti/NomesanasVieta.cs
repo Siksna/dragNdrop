@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class NomesanasVieta : MonoBehaviour,IDropHandler {
 
 		private float vietasZrot, velkObjZRot, rotacijasStarpiba;
 	private Vector2 vietasIzm, velkObjIzm;
 	private float xIzmStarpiba, yIzmStarpiba;
+	[HideInInspector]
 	public Objekti objektuSkripts;
 	public static int MasinuSk=0;
-	public bool AktivizetBeiguEkranu=false;
+	public int laiksH,laiksM,laiksS;
+
+	[HideInInspector]
+	public int laiks = 0;
     public void OnDrop(PointerEventData eventData)
     {
        if(eventData.pointerDrag!=null)
@@ -38,7 +46,33 @@ public class NomesanasVieta : MonoBehaviour,IDropHandler {
 					//Skaita maśínas lídz kamér ir 12 ievietotas maśínas pareizajás vietás un tad padod zińu ka var aktivizét uzvaras ekránu
 					MasinuSk+=1;
 					if (MasinuSk == 12) {
-						AktivizetBeiguEkranu = true;
+						//Iesledz uzvaras ekranu
+						objektuSkripts.UzvarasLogs.SetActive(true);
+						//Laiku konvertacijas
+						laiksH = laiks / 3600;
+						laiksM = laiks / 60;
+						laiksS = laiks-laiksM*60;
+						//Laiku izvade
+						objektuSkripts.LaikaTeksts.GetComponent<Text>().text ="Jūsu laiks\n"+laiksH.ToString()+":"+laiksM.ToString()+":"+laiksS.ToString();
+
+						//ja laiks mazáks par 100 tad bus iedotas 3 zvaigznes
+						if (laiks<=100)
+						{
+							objektuSkripts.Zvaigznes[0].SetActive(true);
+							objektuSkripts.Zvaigznes[1].SetActive(true);
+							objektuSkripts.Zvaigznes[2].SetActive(true);
+						}
+						//Ja laiks ir vairak par 100 un mazak vai vienadi ar 150 tad tiks iedotas 2 zvaigznes
+						if (laiks>100 && laiks<=150)
+						{
+							objektuSkripts.Zvaigznes[0].SetActive(true);
+							objektuSkripts.Zvaigznes[1].SetActive(true);
+						}
+						//Ja laiks ir vairak par 150 tad tiks iedota 1 zvaigzne
+						if(laiks>150)
+						{
+							objektuSkripts.Zvaigznes[0].SetActive(true);
+						}
 					}
 					Debug.Log("Nomests pareizajā vietā!"+MasinuSk);
 					objektuSkripts.vaiIstajaVieta = true;
@@ -143,15 +177,44 @@ public class NomesanasVieta : MonoBehaviour,IDropHandler {
                 }
             }
 		}
+
     }
 
-    // Use this for initialization
-    void Start () {
-		
+	void Start()
+	{
+		StartCoroutine(time());
+
+
 	}
+
+
+	//kamér patiess skaita laiku ik péc 1 sekundes ĺauj mainít vértíbu
+	IEnumerator time()
+	{
+		while (true)
+		{
+
+
+			timeCount();
+			yield return new WaitForSeconds(1);
+		}
+	}
+
+	//Skaita pa vienam laiku
+	void timeCount()
+	{
+		laiks += 1;
+	}
+		
+	public void RestartetSpeli(){
+		//Nospieźot pogu tiks restarteta spele un mainigie tiks parveidoti atpakal uz 0
+		SceneManager.LoadScene("PilsetasKarte", LoadSceneMode.Single);
+		MasinuSk = 0;
+		laiks = 0;
+	}
+
+}
+	
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
-}
+	
